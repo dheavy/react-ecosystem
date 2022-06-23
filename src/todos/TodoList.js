@@ -3,16 +3,28 @@ import { connect } from 'react-redux';
 import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
 import { loadTodos, markAsCompletedRequest, removeTodoRequest } from '../thunks';
+import { getTodosLoading, getCompleteTodos, getIncompleteTodos } from '../store/selectors';
 import './TodoList.css';
-import { getTodos, getTodosLoading } from '../store/selectors';
 
-export const TodoList = ({ todos = [], removeTodo, completeTodo, isLoading, loadTodos }) => {
+export const TodoList = ({ completedTodos, incompletedTodos, removeTodo, completeTodo, isLoading, loadTodos }) => {
   const loadingMessage = <div>Loading todos...</div>;
   const content = (
     <div className="list-wrapper">
       <NewTodoForm />
+      <h3>Incomplete Todos</h3>
       {
-        todos.map((todo, i) => (
+        incompletedTodos.map((todo, i) => (
+          <TodoListItem
+            key={i}
+            todo={todo}
+            completeTodo={completeTodo}
+            removeTodo={removeTodo}
+          />
+        ))
+      }
+      <h3>Complete Todos</h3>
+      {
+        completedTodos.map((todo, i) => (
           <TodoListItem
             key={i}
             todo={todo}
@@ -33,7 +45,8 @@ export const TodoList = ({ todos = [], removeTodo, completeTodo, isLoading, load
 
 const mapStateToProps = state => ({
   isLoading: getTodosLoading(state),
-  todos: getTodos(state)
+  completedTodos: getCompleteTodos(state),
+  incompletedTodos: getIncompleteTodos(state)
 });
 
 const mapDispatchToProps = dispatch => ({
