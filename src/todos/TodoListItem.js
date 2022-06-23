@@ -7,13 +7,13 @@ const TodoListItem = ({ todo, removeTodo, completeTodo }) => (
     <div className="button-container">
      {!todo.isCompleted && <button
         className="completed-button"
-        onClick={() => completeTodo(todo.text)}
+        onClick={() => completeTodo(todo.id)}
       >
         Mark as Completed
       </button>}
       <button
         className="remove-button"
-        onClick={() => removeTodo(todo.text)}
+        onClick={() => removeTodo(todo.id)}
       >
         Remove
       </button>
