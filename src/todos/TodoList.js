@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
-import { removeTodo } from '../store/actions';
+import { completeTodo, removeTodo } from '../store/actions';
 import './TodoList.css';
 
-const TodoList = ({ todos = [], removeTodo }) => (
+export const TodoList = ({ todos = [], removeTodo, completeTodo }) => (
   <div className="list-wrapper">
     <NewTodoForm />
     {
@@ -13,6 +13,7 @@ const TodoList = ({ todos = [], removeTodo }) => (
         <TodoListItem
           key={i}
           todo={todo}
+          completeTodo={completeTodo}
           removeTodo={removeTodo}
         />
       ))
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  completeTodo: text => dispatch(completeTodo(text)),
   removeTodo: text => dispatch(removeTodo(text))
 });
 
