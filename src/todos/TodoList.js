@@ -4,6 +4,7 @@ import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
 import { loadTodos, markAsCompletedRequest, removeTodoRequest } from '../thunks';
 import './TodoList.css';
+import { getTodos, getTodosLoading } from '../store/selectors';
 
 export const TodoList = ({ todos = [], removeTodo, completeTodo, isLoading, loadTodos }) => {
   const loadingMessage = <div>Loading todos...</div>;
@@ -31,8 +32,8 @@ export const TodoList = ({ todos = [], removeTodo, completeTodo, isLoading, load
 };
 
 const mapStateToProps = state => ({
-  isLoading: state.isLoading,
-  todos: state.todos
+  isLoading: getTodosLoading(state),
+  todos: getTodos(state)
 });
 
 const mapDispatchToProps = dispatch => ({

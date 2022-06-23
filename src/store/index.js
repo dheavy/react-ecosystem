@@ -4,11 +4,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { todos, isLoading } from './reducers';
+import { todos } from './reducers';
 
 const reducers = {
-  todos,
-  isLoading
+  todos
 };
 
 const persistConfig = {
