@@ -2,14 +2,27 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
-import { loadTodos, markAsCompletedRequest, removeTodoRequest } from '../thunks';
-import { getTodosLoading, getCompleteTodos, getIncompleteTodos } from '../store/selectors';
-import './TodoList.css';
+import {
+  loadTodos,
+  markAsCompletedRequest,
+  removeTodoRequest
+} from '../thunks';
+import {
+  getTodosLoading,
+  getCompleteTodos,
+  getIncompleteTodos
+} from '../store/selectors';
+import styled from 'styled-components';
+
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
 
 export const TodoList = ({ completedTodos, incompletedTodos, removeTodo, completeTodo, isLoading, loadTodos }) => {
   const loadingMessage = <div>Loading todos...</div>;
   const content = (
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewTodoForm />
       <h3>Incomplete Todos</h3>
       {
@@ -33,7 +46,7 @@ export const TodoList = ({ completedTodos, incompletedTodos, removeTodo, complet
           />
         ))
       }
-    </div>
+    </ListWrapper>
   );
 
   useEffect(() => {
